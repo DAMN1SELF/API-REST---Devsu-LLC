@@ -1,6 +1,7 @@
 ﻿
 
 using INCHE.Application.Database.Client.Command.Create;
+using INCHE.Application.Database.Client.Command.Delete;
 using INCHE.Application.Database.Client.Command.Patch;
 using INCHE.Application.Database.Client.Command.Update;
 using INCHE.Application.Database.Client.Dto.Create;
@@ -61,5 +62,19 @@ namespace INCHE.API.Controllers
 
 
         }
+
+        // DELETE: api/v1/cliente/{id}
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(
+            int id,
+            [FromServices] IDeleteClientCommand deleteCommand)
+        {
+            var data = await deleteCommand.Execute(id);
+            if (!data)
+                return StatusCode(StatusCodes.Status404NotFound, ResponseApiService.Response(StatusCodes.Status404NotFound, message: Messages.RecordAlreadyDeleted));
+
+            return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, message: Messages.RecordDeleted));
+        }
+
     }
 }
