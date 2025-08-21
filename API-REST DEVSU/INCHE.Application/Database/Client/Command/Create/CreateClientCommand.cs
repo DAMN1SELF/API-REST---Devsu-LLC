@@ -28,11 +28,11 @@ namespace INCHE.Application.Database.Client.Command.Create
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(create.IdentificacionCliente))
-                {
-                    var dup = await _db.Cliente.AnyAsync(c => c.Identificacion == create.IdentificacionCliente);
-                    if (dup) throw new ApplicationException(Messages.DuplicateKey);
-                }
+                //if (!string.IsNullOrWhiteSpace(create.IdentificacionCliente))
+                //{
+                //    var dup = await _db.Cliente.AnyAsync(c => c.Identificacion == create.IdentificacionCliente);
+                //    if (dup) throw new ApplicationException(Messages.DuplicateKey);
+                //}
 
                 var entity = _mapper.Map<ClienteEntity>(create);
 
