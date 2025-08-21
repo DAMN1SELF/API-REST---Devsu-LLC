@@ -23,21 +23,21 @@ namespace INCHE.Application.Configuration
                 .ForMember(entity => entity.Cuentas, opt => opt.Ignore());
 
 
-            //// UpdateDTO → Entity
-            //CreateMap<UpdateClientDTO, ClienteEntity>()
-            //    .AfterMap((src, dest) =>
-            //    {
-            //        dest.Update(
-            //            nombres: src.NombresCliente,
-            //            genero: src.GeneroCliente,
-            //            edad: src.EdadCliente,
-            //            identificacion: src.IdentificacionCliente,
-            //            direccion: src.DireccionCliente,
-            //            telefono: src.TelefonoCliente,
-            //            contrasenaHash: src.ContrasenaHashCliente
-            //        );
-            //    })
-            //    .ForAllMembers(o => o.Ignore());
+            // UpdateDTO → Entity
+            CreateMap<UpdateClientDTO, ClienteEntity>()
+                .AfterMap((src, dest) =>
+                {
+                    dest.Update(
+                        nombres: src.NombresCliente,
+                        genero: src.GeneroCliente,
+                        edad: src.EdadCliente,
+                        identificacion: src.IdentificacionCliente,
+                        direccion: src.DireccionCliente,
+                        telefono: src.TelefonoCliente,
+                        contrasenaHash: src.ContrasenaHashCliente
+                    );
+                })
+                .ForAllMembers(o => o.Ignore());
             //// PatchDTO → Entity
             //CreateMap<PatchClientDTO, ClienteEntity>()
             //    .AfterMap((src, dest) =>

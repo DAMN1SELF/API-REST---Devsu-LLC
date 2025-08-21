@@ -11,7 +11,7 @@ namespace INCHE.Application.Exceptions
         public void OnException(ExceptionContext context)
         {
             context.Result = new ObjectResult(ResponseApiService.Response(
-                StatusCodes.Status500InternalServerError, null, context.Exception.Message));
+                StatusCodes.Status500InternalServerError,context.Exception.InnerException.Message, context.Exception.Message));
 
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 

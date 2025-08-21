@@ -20,19 +20,18 @@ namespace INCHE.Application.Database.Client.Command.Update
         public async Task<ResponseClientDTO> Execute(int id, UpdateClientDTO update)
         {
 
-            if (update.CodigoCliente != id)
-                throw new ApplicationException(Messages.RouteIdDoesNotMatchBodyId);
-
-            var entity = await _db.Cliente.FirstOrDefaultAsync(e => e.PersonaId == id);
+            var entity = await _db.Cliente
+                .Include(c => c.Persona)
+                .FirstOrDefaultAsync(e => e.ClienteId == id);
             if (entity is null) throw new ApplicationException(Messages.RecordNotFound);
 
             try
             {
 
                 if (!string.IsNullOrWhiteSpace(update.IdentificacionCliente) &&
-                    update.IdentificacionCliente != entity.Identificacion)
+                    update.IdentificacionCliente != entity.Persona.Identificacion)
                 {
-                    var dup = await _db.Cliente.AnyAsync(e => e.PersonaId != id && e.Identificacion == update.IdentificacionCliente);
+                    var dup = await _db.Cliente.AnyAsync(e => e.ClienteId != id && e.Persona.Identificacion == update.IdentificacionCliente);
                     if (dup) throw new ApplicationException(Messages.DuplicateKey);
                 }
 

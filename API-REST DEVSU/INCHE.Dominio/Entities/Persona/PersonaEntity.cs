@@ -8,31 +8,45 @@ namespace INCHE.Domain.Entities
     {
         public int PersonaId { get; protected set; }
         public string Nombres { get; private set; } = null!;
-        public string? Genero { get; private set; }      // "M"/"F" (opcional)
-        public byte? Edad { get; private set; }          // 0..120
+        public string? Genero { get; private set; }
+        public byte? Edad { get; private set; }
         public string? Identificacion { get; private set; }
         public string? Direccion { get; private set; }
         public string? Telefono { get; private set; }
 
+        // 🔑 Navegación inversa (1:1 con Cliente)
+        public ClienteEntity? Cliente { get; private set; }
+
         protected PersonaEntity() { }
+
 
         public PersonaEntity(string nombres, string? genero, byte? edad,
             string? identificacion, string? direccion, string? telefono)
         {
-
-            Nombres = nombres;
-            Genero = genero;
-            Edad = edad;
-            Identificacion = identificacion;
-            Direccion = direccion;
-            Telefono = telefono;
+            SetNombres(nombres);
+            SetGenero(genero);
+            SetEdad(edad);
+            SetIdentificacion(identificacion);
+            SetDireccion(direccion);
+            SetTelefono(telefono);
         }
 
+        public void Update(string nombres,  string? genero, byte? edad,
+            string? identificacion,string? direccion, string? telefono)
+        {
+            SetNombres(nombres);
+            SetGenero(genero);
+            SetEdad(edad);
+            SetIdentificacion(identificacion);
+            SetDireccion(direccion);
+            SetTelefono(telefono);
+        }
 
+        #region Setters protegidos
         protected void SetNombres(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException( "El nombre es obligatorio.", nameof(value));
+                throw new ArgumentException("El nombre es obligatorio.", nameof(value));
 
             var trimmed = value.Trim();
             if (trimmed.Length > 100)
@@ -104,11 +118,11 @@ namespace INCHE.Domain.Entities
 
             var digits = new string(value.Where(char.IsDigit).ToArray());
             if (digits.Length < 6 || digits.Length > 20)
-                throw new ArgumentException( "Teléfono inválido (6..20 dígitos).", nameof(value));
+                throw new ArgumentException("Teléfono inválido (6..20 dígitos).", nameof(value));
 
             Telefono = digits;
         }
 
-
+        #endregion
     }
 }
