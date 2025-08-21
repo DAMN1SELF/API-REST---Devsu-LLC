@@ -8,26 +8,28 @@ namespace INCHE.Infrastructure.Database.Configuration
     public class ClienteConfiguration
     {
         public ClienteConfiguration(EntityTypeBuilder<ClienteEntity> b)
-        {
 
+
+        {
             b.ToTable("Cliente");
 
-            // MUY IMPORTANTE:
-            // Renombrar la PK heredada (PersonaId) en la tabla Cliente → ClienteId
-            b.Property(e => e.PersonaId)
-                .HasColumnName("ClienteId");
+            b.HasKey(c => c.ClienteId);
 
-            b.Property(e => e.ContrasenaHash)
-                .HasColumnName("ContrasenaHash")
-                .IsRequired();
+            b.Property(c => c.ContrasenaHash)
+                .IsRequired()
+                .HasMaxLength(200);
 
-            b.Property(e => e.Estado)
-                .HasColumnName("Estado")
+            b.Property(c => c.Estado)
                 .HasDefaultValue(true);
 
-            b.Property(e => e.FechaRegistro)
-                .HasColumnName("FechaRegistro")
-                .HasDefaultValueSql("sysdatetime()");
+            b.Property(c => c.FechaRegistro)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            // Relación 1:1 con Persona (PK = FK)
+            b.HasOne(c => c.Persona)
+                .WithOne(p => p.Cliente)
+                .HasForeignKey<ClienteEntity>(c => c.ClienteId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

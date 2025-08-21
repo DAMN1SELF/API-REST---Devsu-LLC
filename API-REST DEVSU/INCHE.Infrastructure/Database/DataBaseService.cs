@@ -23,6 +23,7 @@ public class DataBaseService : DbContext, IDataBaseService
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
         EntityConfiguration(modelBuilder);
     }
 
@@ -34,5 +35,6 @@ public class DataBaseService : DbContext, IDataBaseService
         new ClienteConfiguration(modelBuilder.Entity<ClienteEntity>());
         new CuentaConfiguration(modelBuilder.Entity<CuentaEntity>());
         new MovimientoConfiguration(modelBuilder.Entity<MovimientoEntity>());
+
     }
 }

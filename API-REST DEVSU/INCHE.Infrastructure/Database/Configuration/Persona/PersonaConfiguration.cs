@@ -1,6 +1,7 @@
 ﻿using INCHE.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace INCHE.Infrastructure.Database.Configuration
 {
@@ -8,26 +9,28 @@ namespace INCHE.Infrastructure.Database.Configuration
     {
         public PersonaConfiguration(EntityTypeBuilder<PersonaEntity> b)
         {
+
             b.ToTable("Persona");
 
-            b.HasKey(x => x.PersonaId);
-            b.Property(x => x.PersonaId).HasColumnName("PersonaId");
+            b.HasKey(p => p.PersonaId);
 
-            b.Property(x => x.Nombres).HasColumnName("Nombres")
-                .IsRequired().HasMaxLength(100);
+            b.Property(p => p.PersonaId)
+                .ValueGeneratedOnAdd(); // Identity
 
-            b.Property(x => x.Genero).HasColumnName("Genero")
-                .HasColumnType("char(1)");
+            b.Property(p => p.Nombres)
+                .IsRequired()
+                .HasMaxLength(100);
 
-            b.Property(x => x.Edad).HasColumnName("Edad");
+            b.Property(p => p.Genero)
+                .HasMaxLength(1);
 
-            b.Property(x => x.Identificacion).HasColumnName("Identificacion")
-                .HasMaxLength(20);
+            b.Property(p => p.Identificacion)
+                .HasMaxLength(30);
 
-            b.Property(x => x.Direccion).HasColumnName("Direccion")
+            b.Property(p => p.Direccion)
                 .HasMaxLength(200);
 
-            b.Property(x => x.Telefono).HasColumnName("Telefono")
+            b.Property(p => p.Telefono)
                 .HasMaxLength(20);
         }
     }
