@@ -38,23 +38,23 @@ namespace INCHE.Application.Configuration
                     );
                 })
                 .ForAllMembers(o => o.Ignore());
-            //// PatchDTO → Entity
-            //CreateMap<PatchClientDTO, ClienteEntity>()
-            //    .AfterMap((src, dest) =>
-            //    {
-            //        dest.Patch(
-            //            nombres: src.NombresCliente,
-            //            genero: src.GeneroCliente,
-            //            edad: src.EdadCliente,
-            //            identificacion: src.IdentificacionCliente,
-            //            direccion: src.DireccionCliente,
-            //            telefono: src.TelefonoCliente,
-            //            contrasenaHash: src.ContrasenaHashCliente,
-            //            estado:src.EstadoCliente
-            //        );
-            //    })
-            //    .ForAllMembers(o => o.Ignore())
-            //   ;
+            // PatchDTO → Entity
+            CreateMap<PatchClientDTO, ClienteEntity>()
+                .AfterMap((src, dest) =>
+                {
+                    dest.Patch(
+                        nombres: src.NombresCliente,
+                        genero: src.GeneroCliente,
+                        edad: src.EdadCliente,
+                        identificacion: src.IdentificacionCliente,
+                        direccion: src.DireccionCliente,
+                        telefono: src.TelefonoCliente,
+                        contrasenaHash: src.ContrasenaHashCliente,
+                        estado: src.EstadoCliente
+                    );
+                })
+                .ForAllMembers(o => o.Ignore())
+               ;
 
             // Entity → ResponseDTO
             CreateMap<ClienteEntity, ResponseClientDTO>()

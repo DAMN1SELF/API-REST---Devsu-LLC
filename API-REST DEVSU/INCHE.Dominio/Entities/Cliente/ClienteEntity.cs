@@ -49,6 +49,28 @@ namespace INCHE.Domain.Entities
                 SetContrasenaHash(contrasenaHash);
 
         }
+        public void Patch(string? nombres = null,string? genero = null, byte? edad = null,
+            string? identificacion = null,string? direccion = null,string? telefono = null, string? contrasenaHash = null,bool? estado = null)
+        {
+            if (Persona is null)
+                throw new InvalidOperationException("No se puede actualizar un Cliente sin Persona asociada.");
+
+            if (nombres is not null) Persona.Update(nombres, Persona.Genero, Persona.Edad, Persona.Identificacion, Persona.Direccion, Persona.Telefono);
+            if (genero is not null) Persona.Update(Persona.Nombres, genero, Persona.Edad, Persona.Identificacion, Persona.Direccion, Persona.Telefono);
+            if (edad is not null) Persona.Update(Persona.Nombres, Persona.Genero, edad, Persona.Identificacion, Persona.Direccion, Persona.Telefono);
+            if (identificacion is not null) Persona.Update(Persona.Nombres, Persona.Genero, Persona.Edad, identificacion, Persona.Direccion, Persona.Telefono);
+            if (direccion is not null) Persona.Update(Persona.Nombres, Persona.Genero, Persona.Edad, Persona.Identificacion, direccion, Persona.Telefono);
+            if (telefono is not null) Persona.Update(Persona.Nombres, Persona.Genero, Persona.Edad, Persona.Identificacion, Persona.Direccion, telefono);
+
+            if (!string.IsNullOrWhiteSpace(contrasenaHash))
+                SetContrasenaHash(contrasenaHash);
+
+            if (estado.HasValue)
+            {
+                if (estado.Value) Activar();
+                else Desactivar();
+            }
+        }
         protected void SetContrasenaHash(string hash)
         {
             if (string.IsNullOrWhiteSpace(hash))

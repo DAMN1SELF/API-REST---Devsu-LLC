@@ -1,8 +1,10 @@
 ﻿
 
 using INCHE.Application.Database.Client.Command.Create;
+using INCHE.Application.Database.Client.Command.Patch;
 using INCHE.Application.Database.Client.Command.Update;
 using INCHE.Application.Database.Client.Dto.Create;
+using INCHE.Application.Database.Client.Dto.Patch;
 using INCHE.Application.Database.Client.Dto.Update;
 using INCHE.Application.Exceptions;
 using INCHE.Application.Features;
@@ -18,8 +20,8 @@ namespace INCHE.API.Controllers
     [TypeFilter(typeof(ExceptionManager))]
     public class ClientController : ControllerBase
     {
-        // POST: api/v1/cliente/insertar
-        [HttpPost("insertar")]
+        // POST: api/v1/cliente/
+        [HttpPost]
         public async Task<IActionResult> Create(
             [FromBody] CreateClientDTO model,
             [FromServices] ICreateClientCommand createCommand)
@@ -28,8 +30,8 @@ namespace INCHE.API.Controllers
             return StatusCode(StatusCodes.Status201Created,ResponseApiService.Response(StatusCodes.Status201Created, data));
         }
 
-        // PUT: api/v1/cliente/actualizar/{id}
-        [HttpPut("actualizar/{id:int}")]
+        // PUT: api/v1/cliente/{id}
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(
             int id,
             [FromBody] UpdateClientDTO model,
@@ -40,6 +42,24 @@ namespace INCHE.API.Controllers
 
             var data = await updateCommand.Execute(id,model);
             return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data, Messages.RecordUpdated));
+        }
+
+
+        // PATCH: api/v1/cliente/{id}
+        [HttpPatch("{id:int}")]
+        public async Task<IActionResult> Patch(
+            int id,
+            [FromBody] PatchClientDTO model,
+            [FromServices] IPatchClientCommand patchCommand)
+        {
+            if (id != model.CodigoCliente)
+                return BadRequest(ResponseApiService.Response(StatusCodes.Status400BadRequest, Messages.RouteIdDoesNotMatchBodyId));
+
+
+            var data = await patchCommand.Execute(id, model);
+            return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data, Messages.RecordUpdated));
+
+
         }
     }
 }
