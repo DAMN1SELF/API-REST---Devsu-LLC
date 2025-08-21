@@ -13,10 +13,20 @@ namespace INCHE.Infrastructure
         public static IServiceCollection AddPersistence(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<DataBaseService>(options =>
-            options.UseSqlServer(configuration["SQLConnectionString"]));
 
-			services.AddScoped<IDataBaseService, DataBaseService>();
+            var conn = configuration.GetConnectionString("SQLConnectionString");
+
+
+            services.AddDbContext<DataBaseService>(options =>
+            options.UseSqlServer(conn));
+
+
+            services.AddDbContext<DataBaseService>(options =>
+                options.UseSqlServer(conn)
+                    .EnableSensitiveDataLogging(true)    // opcional (solo en dev)
+                    .LogTo(Console.WriteLine));
+
+            services.AddScoped<IDataBaseService, DataBaseService>();
 
 			return services;
         }
