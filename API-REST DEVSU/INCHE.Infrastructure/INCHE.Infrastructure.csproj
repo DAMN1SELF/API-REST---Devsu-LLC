@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\INCHE.Application\INCHE.Application.csproj" />
     <ProjectReference Include="..\INCHE.Dominio\INCHE.Domain.csproj" />
   </ItemGroup>
 

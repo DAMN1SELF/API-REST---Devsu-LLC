@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace INCHE.Infrastructure
+namespace INCHE.Infrastructure.Database.Configuration
 {
     public class MovimientoConfiguration
     {
-        public MovimientoConfiguration(EntityTypeBuilder<Movimiento> e)
+        public MovimientoConfiguration(EntityTypeBuilder<MovimientoEntity> e)
         {
             e.ToTable("Movimiento");
             e.HasKey(x => x.MovimientoId).HasName("PK_Movimiento");

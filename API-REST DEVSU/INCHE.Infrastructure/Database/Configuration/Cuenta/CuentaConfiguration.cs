@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace INCHE.Infrastructure.Configuration
+namespace INCHE.Infrastructure.Database.Configuration
 {
     public class CuentaConfiguration
     {
-        public CuentaConfiguration(EntityTypeBuilder<Cuenta> e)
+        public CuentaConfiguration(EntityTypeBuilder<CuentaEntity> e)
         {
             e.ToTable("Cuenta");
             e.HasKey(x => x.NumeroCuenta).HasName("PK_Cuenta");

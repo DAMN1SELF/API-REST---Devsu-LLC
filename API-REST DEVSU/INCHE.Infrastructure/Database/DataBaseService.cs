@@ -1,18 +1,25 @@
-﻿using INCHE.Domain.Entities;
-using INCHE.Infrastructure.Configuration;
+﻿using INCHE.Application.DataBase;
+using INCHE.Domain.Entities;
+using INCHE.Infrastructure.Database.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace INCHE.Infrastructure.Database;
 
-public class BancoDbContext : DbContext
+public class DataBaseService : DbContext, IDataBaseService
 {
-    public BancoDbContext(DbContextOptions<BancoDbContext> options) : base(options) { }
+    public DataBaseService(DbContextOptions options) : base(options) { }
 
-    public DbSet<Persona> Personas => Set<Persona>();
-    public DbSet<Cliente> Clientes => Set<Cliente>();
-    public DbSet<Cuenta> Cuentas => Set<Cuenta>();
-    public DbSet<Movimiento> Movimientos => Set<Movimiento>();
+    public DbSet<ClienteEntity> Cliente { get; set; }
+    public DbSet<CuentaEntity> Cuenta { get; set; }
+    public DbSet<MovimientoEntity> Movimiento { get; set; }
+    public DbSet<PersonaEntity> Persona { get; set; }
 
+    public Task<IDbContextTransaction> BeginTransactionAsync()
+        => Database.BeginTransactionAsync();
+
+    public async Task<bool> SaveAsync()
+        => await SaveChangesAsync() > 0;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -21,9 +28,11 @@ public class BancoDbContext : DbContext
 
     private void EntityConfiguration(ModelBuilder modelBuilder)
     {
-        new PersonaConfiguration(modelBuilder.Entity<Persona>());
-        new ClienteConfiguration(modelBuilder.Entity<Cliente>());  
-        new CuentaConfiguration(modelBuilder.Entity<Cuenta>());
-        new MovimientoConfiguration(modelBuilder.Entity<Movimiento>());
+        
+
+        new PersonaConfiguration(modelBuilder.Entity<PersonaEntity>());
+        new ClienteConfiguration(modelBuilder.Entity<ClienteEntity>());
+        new CuentaConfiguration(modelBuilder.Entity<CuentaEntity>());
+        new MovimientoConfiguration(modelBuilder.Entity<MovimientoEntity>());
     }
 }
