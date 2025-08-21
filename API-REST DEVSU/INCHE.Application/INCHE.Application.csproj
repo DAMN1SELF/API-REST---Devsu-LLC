@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Client\Query\GetAll\" />
-    <Folder Include="Database\Client\Query\GetbyId\" />
     <Folder Include="Database\Cuenta\Command\Create\" />
     <Folder Include="Database\Cuenta\Command\Delete\" />
     <Folder Include="Database\Cuenta\Command\Patch\" />

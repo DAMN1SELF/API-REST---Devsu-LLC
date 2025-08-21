@@ -56,11 +56,11 @@ namespace INCHE.Application.Configuration
                 .ForAllMembers(o => o.Ignore())
                ;
 
-            // Entity → Response
+            // Entity → ResponseDTO
             CreateMap<ClienteEntity, ResponseClientDTO>()
-                .ForMember(dto => dto.CodigoCliente, opt => opt.Ignore())
-                .ForMember(dto => dto.EstadoCliente, opt => opt.Ignore())
-                .ForMember(dto => dto.FechaRegistroCliente, opt => opt.Ignore())
+                .ForMember(dto => dto.CodigoCliente, opt => opt.MapFrom(entity => entity.PersonaId))
+                .ForMember(dto => dto.EstadoCliente, opt => opt.MapFrom(entity => entity.Estado))
+                .ForMember(dto => dto.FechaRegistroCliente, opt => opt.MapFrom(entity => entity.FechaRegistro))
 
                 .ForMember(dto => dto.NombresCliente, opt => opt.MapFrom(entity => entity.Nombres))
                 .ForMember(dto => dto.GeneroCliente, opt => opt.MapFrom(entity => entity.Genero))
