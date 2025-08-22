@@ -31,7 +31,7 @@ namespace INCHE.Application.Database.Client.Command.Create
                 if (!string.IsNullOrWhiteSpace(create.IdentificacionCliente))
                 {
                     var dup = await _db.Cliente.AnyAsync(c => c.Persona.Identificacion == create.IdentificacionCliente);
-                    if (dup) throw new ApplicationException(Messages.DuplicateKey);
+                    if (dup) throw new ApplicationException(Messages.DuplicateId);
                 }
 
                 var entity = _mapper.Map<ClientEntity>(create);

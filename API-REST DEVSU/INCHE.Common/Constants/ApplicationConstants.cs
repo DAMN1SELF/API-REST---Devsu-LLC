@@ -30,6 +30,7 @@ namespace INCHE.Common.Constants
 		public const string MissingData = "Faltan datos obligatorios";
 
 		public const string DuplicateKey = "Ya existe un registro con la misma clave";
+        public const string DuplicateId = "Ya existe un registro con la misma identificacion";
 		public const string DuplicateAccount = "Ya existe una cuenta con el mismo número de cuenta";
         public const string PasswordRequired = "La contraseña es obligatoria";
 
