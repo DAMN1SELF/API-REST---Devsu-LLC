@@ -12,7 +12,10 @@ namespace INCHE.Infrastructure.Database.Configuration
 
             b.HasKey(m => m.MovimientoId);
             b.Property(m => m.MovimientoId)
-                .HasColumnName("MovimientoId");
+                .HasColumnName("MovimientoId")
+                .HasColumnType("bigint")               
+                .ValueGeneratedOnAdd();
+
 
             b.Property(m => m.NumeroCuenta)
                 .HasColumnName("NumeroCuenta");
@@ -24,7 +27,6 @@ namespace INCHE.Infrastructure.Database.Configuration
 
             b.Property(m => m.TipoMovimiento)
                 .HasColumnName("TipoMovimiento")
-                .HasMaxLength(20)
                 .IsRequired();
 
             b.Property(m => m.Valor)

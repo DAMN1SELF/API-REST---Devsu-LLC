@@ -1,10 +1,10 @@
 ﻿
 
-namespace INCHE.Domain.Entities.Transaction
+namespace INCHE.Domain.Entities
 {
     public enum TransactionType : byte
     {
-        Credito = (byte)'C', // 'C' = 67
-        Debito = (byte)'D'  // 'D' = 68
+        Credito = 1, 
+        Debito = 2  
     }
 }

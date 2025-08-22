@@ -29,7 +29,8 @@ namespace INCHE.Common.Constants
         public const string InvalidRecordId = "El identificador no es válido";
 		public const string MissingData = "Faltan datos obligatorios";
 
-		public const string DuplicateKey = "Ya existe un registro con la misma clave";
+		public const string InvalidKey = "La clave proporcionada no es válida";
+        public const string DuplicateKey = "Ya existe un registro con la misma clave";
         public const string DuplicateId = "Ya existe un registro con la misma identificacion";
 		public const string DuplicateAccount = "Ya existe una cuenta con el mismo número de cuenta";
         public const string PasswordRequired = "La contraseña es obligatoria";
@@ -38,5 +39,6 @@ namespace INCHE.Common.Constants
         public const string RouteIdDoesNotMatchBodyId = "El identificador de la ruta no coincide con el del cuerpo de la solicitud";
 		public const string InvalidCredentials = "Credenciales inválidas";
 		public const string ClientHasLinkedAccounts = "El cliente tiene cuentas vinculadas y no puede ser eliminado";
+		public const string AccountHasLinkedMovements = "La cuenta tiene movimientos vinculados y no puede ser eliminada";
     }
 }

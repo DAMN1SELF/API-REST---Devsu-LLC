@@ -25,6 +25,11 @@ namespace INCHE.Infrastructure.Database.Configuration
             b.Property(c => c.Estado)
                 .HasDefaultValue(true);
 
+
+            b.Property(c => c.TipoCuenta)
+                .HasColumnName("TipoCuenta")
+                .IsRequired();
+
             b.Property(c => c.FechaApertura)
                 .HasDefaultValueSql("GETUTCDATE()");
 
