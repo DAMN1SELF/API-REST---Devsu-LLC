@@ -57,16 +57,16 @@ namespace INCHE.Application.Configuration
 
             // Entity -> ResponseDTO
             CreateMap<ClientEntity, ResponseClientDTO>()
-                .ForMember(dto => dto.CodigoCliente, opt => opt.MapFrom(entity => entity.Persona.PersonaId))
+                .ForMember(dto => dto.CodigoCliente, opt => opt.MapFrom(entity => entity.Person.PersonaId))
                 .ForMember(dto => dto.EstadoCliente, opt => opt.MapFrom(entity => entity.Estado))
                 .ForMember(dto => dto.FechaRegistroCliente, opt => opt.MapFrom(entity => entity.FechaRegistro))
 
-                .ForMember(dto => dto.NombresCliente, opt => opt.MapFrom(entity => entity.Persona.Nombres))
-                .ForMember(dto => dto.GeneroCliente, opt => opt.MapFrom(entity => entity.Persona.Genero))
-                .ForMember(dto => dto.EdadCliente, opt => opt.MapFrom(entity => entity.Persona.Edad))
-                .ForMember(dto => dto.IdentificacionCliente, opt => opt.MapFrom(entity => entity.Persona.Identificacion))
-                .ForMember(dto => dto.DireccionCliente, opt => opt.MapFrom(entity => entity.Persona.Direccion))
-                .ForMember(dto => dto.TelefonoCliente, opt => opt.MapFrom(entity => entity.Persona.Telefono));
+                .ForMember(dto => dto.NombresCliente, opt => opt.MapFrom(entity => entity.Person.Nombres))
+                .ForMember(dto => dto.GeneroCliente, opt => opt.MapFrom(entity => entity.Person.Genero))
+                .ForMember(dto => dto.EdadCliente, opt => opt.MapFrom(entity => entity.Person.Edad))
+                .ForMember(dto => dto.IdentificacionCliente, opt => opt.MapFrom(entity => entity.Person.Identificacion))
+                .ForMember(dto => dto.DireccionCliente, opt => opt.MapFrom(entity => entity.Person.Direccion))
+                .ForMember(dto => dto.TelefonoCliente, opt => opt.MapFrom(entity => entity.Person.Telefono));
         }
     }
 }

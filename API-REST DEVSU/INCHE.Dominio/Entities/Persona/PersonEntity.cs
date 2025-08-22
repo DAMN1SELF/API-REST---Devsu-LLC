@@ -4,7 +4,7 @@ using INCHE.Common.Constants;
 
 namespace INCHE.Domain.Entities
 {
-    public class PersonaEntity
+    public class PersonEntity
     {
         public int PersonaId { get; protected set; }
         public string Nombres { get; private set; } = null!;
@@ -16,10 +16,10 @@ namespace INCHE.Domain.Entities
 
         public ClientEntity? Cliente { get; private set; }
 
-        protected PersonaEntity() { }
+        protected PersonEntity() { }
 
 
-        public PersonaEntity(string nombres, string? genero, byte? edad,
+        public PersonEntity(string nombres, string? genero, byte? edad,
             string? identificacion, string? direccion, string? telefono)
         {
             SetNombres(nombres);

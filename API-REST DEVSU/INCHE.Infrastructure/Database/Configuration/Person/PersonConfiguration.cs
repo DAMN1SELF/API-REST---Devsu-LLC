@@ -1,13 +1,12 @@
 ﻿using INCHE.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace INCHE.Infrastructure.Database.Configuration
 {
     public class PersonConfiguration
     {
-        public PersonConfiguration(EntityTypeBuilder<PersonaEntity> b)
+        public PersonConfiguration(EntityTypeBuilder<PersonEntity> b)
         {
 
             b.ToTable("Persona");

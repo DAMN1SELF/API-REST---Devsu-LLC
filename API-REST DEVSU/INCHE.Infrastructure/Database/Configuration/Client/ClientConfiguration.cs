@@ -1,7 +1,6 @@
 ﻿using INCHE.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace INCHE.Infrastructure.Database.Configuration
 {
@@ -25,7 +24,7 @@ namespace INCHE.Infrastructure.Database.Configuration
             b.Property(c => c.FechaRegistro)
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            b.HasOne(c => c.Persona)
+            b.HasOne(c => c.Person)
                 .WithOne(p => p.Cliente)
                 .HasForeignKey<ClientEntity>(c => c.ClienteId)
                 .OnDelete(DeleteBehavior.Cascade);

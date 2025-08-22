@@ -1,12 +1,14 @@
 ﻿
+using BCrypt.Net;
 using INCHE.Common.Constants;
+using System.Reflection;
 
 namespace INCHE.Domain.Entities
 {
     public class ClientEntity
     {
         public int ClienteId { get; protected set; }
-        public PersonaEntity Persona { get; private set; } = null!;
+        public PersonEntity Person { get; private set; } = null!;
 
         public string ContrasenaHash { get; private set; } = null!;
         public bool Estado { get; private set; } = true;
@@ -15,10 +17,10 @@ namespace INCHE.Domain.Entities
 
         protected ClientEntity() { }
 
-        private ClientEntity(PersonaEntity persona, string contrasenaHash, bool estado, DateTime fechaRegistro)
+        private ClientEntity(PersonEntity person, string contrasenaHash, bool estado, DateTime fechaRegistro)
         {
-            Persona = persona ?? throw new ArgumentNullException(nameof(persona));
-            ClienteId = persona.PersonaId; 
+            Person = person ?? throw new ArgumentNullException(nameof(person));
+            ClienteId = person.PersonaId; 
 
             if (string.IsNullOrWhiteSpace(contrasenaHash))
                 throw new ArgumentException(Messages.PasswordRequired, nameof(contrasenaHash));
@@ -33,15 +35,15 @@ namespace INCHE.Domain.Entities
             string? identificacion, string? direccion, string? telefono,
             string contrasenaHash)
         {
-            var persona = new PersonaEntity(nombres, genero, edad, identificacion, direccion, telefono);
-            return new ClientEntity(persona, contrasenaHash, true, DateTime.UtcNow);
+            var persona = new PersonEntity(nombres, genero, edad, identificacion, direccion, telefono);
+            return new ClientEntity(persona, BCrypt.Net.BCrypt.HashPassword(contrasenaHash), true, DateTime.UtcNow);
         }
         public void Update(
             string nombres,string? genero, byte? edad,
             string? identificacion,  string? direccion,string? telefono, string? contrasenaHash = null)
         {
 
-            Persona.Update(nombres, genero, edad, identificacion, direccion, telefono);
+            Person.Update(nombres, genero, edad, identificacion, direccion, telefono);
 
             if (!string.IsNullOrWhiteSpace(contrasenaHash))
                 SetContrasenaHash(contrasenaHash);
@@ -50,15 +52,15 @@ namespace INCHE.Domain.Entities
         public void Patch(string? nombres = null,string? genero = null, byte? edad = null,
             string? identificacion = null,string? direccion = null,string? telefono = null, string? contrasenaHash = null,bool? estado = null)
         {
-            if (Persona is null)
-                throw new InvalidOperationException("No se puede actualizar un Cliente sin Persona asociada.");
+            if (Person is null)
+                throw new InvalidOperationException("No se puede actualizar un Cliente sin Person asociada.");
 
-            if (nombres is not null) Persona.Update(nombres, Persona.Genero, Persona.Edad, Persona.Identificacion, Persona.Direccion, Persona.Telefono);
-            if (genero is not null) Persona.Update(Persona.Nombres, genero, Persona.Edad, Persona.Identificacion, Persona.Direccion, Persona.Telefono);
-            if (edad is not null) Persona.Update(Persona.Nombres, Persona.Genero, edad, Persona.Identificacion, Persona.Direccion, Persona.Telefono);
-            if (identificacion is not null) Persona.Update(Persona.Nombres, Persona.Genero, Persona.Edad, identificacion, Persona.Direccion, Persona.Telefono);
-            if (direccion is not null) Persona.Update(Persona.Nombres, Persona.Genero, Persona.Edad, Persona.Identificacion, direccion, Persona.Telefono);
-            if (telefono is not null) Persona.Update(Persona.Nombres, Persona.Genero, Persona.Edad, Persona.Identificacion, Persona.Direccion, telefono);
+            if (nombres is not null) Person.Update(nombres, Person.Genero, Person.Edad, Person.Identificacion, Person.Direccion, Person.Telefono);
+            if (genero is not null) Person.Update(Person.Nombres, genero, Person.Edad, Person.Identificacion, Person.Direccion, Person.Telefono);
+            if (edad is not null) Person.Update(Person.Nombres, Person.Genero, edad, Person.Identificacion, Person.Direccion, Person.Telefono);
+            if (identificacion is not null) Person.Update(Person.Nombres, Person.Genero, Person.Edad, identificacion, Person.Direccion, Person.Telefono);
+            if (direccion is not null) Person.Update(Person.Nombres, Person.Genero, Person.Edad, Person.Identificacion, direccion, Person.Telefono);
+            if (telefono is not null) Person.Update(Person.Nombres, Person.Genero, Person.Edad, Person.Identificacion, Person.Direccion, telefono);
 
             if (!string.IsNullOrWhiteSpace(contrasenaHash))
                 SetContrasenaHash(contrasenaHash);
