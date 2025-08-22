@@ -1,6 +1,10 @@
 ﻿
 using AutoMapper;
 using INCHE.Application.Configuration;
+using INCHE.Application.Database.Account.Command.Create;
+using INCHE.Application.Database.Account.Command.Update;
+using INCHE.Application.Database.Account.Query.GetbyIdClient;
+using INCHE.Application.Database.Account.Query.GetbyNumberAccount;
 using INCHE.Application.Database.Client.Command.Create;
 using INCHE.Application.Database.Client.Command.Delete;
 using INCHE.Application.Database.Client.Command.Patch;
@@ -17,7 +21,8 @@ namespace INCHE.Application
         {
             var mapper = new MapperConfiguration(config =>
             {
-                config.AddProfile(new ClienteProfile());
+                config.AddProfile(new ClienteProfile()); 
+                config.AddProfile(new AccountProfile());
             });
 
             services.AddSingleton(mapper.CreateMapper());
@@ -31,6 +36,17 @@ namespace INCHE.Application
 
             services.AddTransient<IGetAllClientQuery, GetAllClientQuery>();
             services.AddTransient<IGetClientByIdQuery, GetClientByIdQuery>();
+
+            #endregion
+
+
+            #region CUENTA
+
+            services.AddTransient<ICreateAccountCommand, CreateAccountCommand>();
+            services.AddTransient<IUpdateAccountCommand, UpdateAccountCommand>();
+
+            services.AddTransient<IGetAccountsByClientQuery, GetAccountsByClientQuery>();
+            services.AddTransient<IGetAccountByNumberQuery, GetAccountByNumberQuery>();
 
             #endregion
 

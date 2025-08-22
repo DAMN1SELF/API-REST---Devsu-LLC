@@ -17,14 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Cuenta\Command\Create\" />
-    <Folder Include="Database\Cuenta\Command\Delete\" />
-    <Folder Include="Database\Cuenta\Command\Patch\" />
-    <Folder Include="Database\Cuenta\Command\Update\" />
-    <Folder Include="Database\Cuenta\Dto\Request\" />
-    <Folder Include="Database\Cuenta\Dto\Response\" />
-    <Folder Include="Database\Cuenta\Query\GetAll\" />
-    <Folder Include="Database\Cuenta\Query\GetbyId\" />
     <Folder Include="Database\Movimiento\Command\Create\" />
     <Folder Include="Database\Movimiento\Command\Delete\" />
     <Folder Include="Database\Movimiento\Command\Patch\" />

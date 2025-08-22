@@ -7,8 +7,12 @@ namespace INCHE.Common.Constants
 		public const string RecordCreated = "El registro se creó correctamente";
 		public const string RecordRetrieved = "El registro se obtuvo correctamente";
 		public const string RecordsRetrieved = "Los registros se obtuvieron correctamente";
-		public const string RecordUpdated = "El registro se actualizó correctamente";
-		public const string RecordPatch = "El registro se actualizó parcialmente de forma correcta";
+		public const string RecordUpdated = "El registro se actualizó correctamente"; 
+        public const string RecordDesactivate= "El registro se desactivo correctamente";
+        public const string RecordActivate= "El registro se activo correctamente";
+        public const string RecordDesactivated = "El registro ya  se encuentra desactivado";
+
+        public const string RecordPatch = "El registro se actualizó parcialmente de forma correcta";
         public const string RecordDeleted = "El registro se eliminó correctamente";
 
 		public const string RecordNotFound = "No se encontró el registro";
@@ -26,7 +30,8 @@ namespace INCHE.Common.Constants
 		public const string MissingData = "Faltan datos obligatorios";
 
 		public const string DuplicateKey = "Ya existe un registro con la misma clave";
-		public const string PasswordRequired = "La contraseña es obligatoria";
+		public const string DuplicateAccount = "Ya existe una cuenta con el mismo número de cuenta";
+        public const string PasswordRequired = "La contraseña es obligatoria";
 
 		public const string Unauthorized = "No autorizado";
         public const string RouteIdDoesNotMatchBodyId = "El identificador de la ruta no coincide con el del cuerpo de la solicitud";

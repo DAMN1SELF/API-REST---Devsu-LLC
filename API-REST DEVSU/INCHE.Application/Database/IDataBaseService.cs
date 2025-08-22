@@ -11,15 +11,15 @@ namespace INCHE.Application.DataBase
 	public interface IDataBaseService
     {
         #region Cliente
-        DbSet<ClienteEntity> Cliente { get; set; }
+        DbSet<ClientEntity> Cliente { get; set; }
         #endregion
 
         #region Cuenta
-        DbSet<CuentaEntity> Cuenta { get; set; }
+        DbSet<AccountEntity> Cuenta { get; set; }
 		#endregion
 
 		#region Movimiento
-		DbSet<MovimientoEntity> Movimiento { get; set; }
+		DbSet<TransactionEntity> Movimiento { get; set; }
         #endregion
 
         DbSet<PersonaEntity> Persona{ get; set; }
