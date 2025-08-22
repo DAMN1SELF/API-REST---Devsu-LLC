@@ -20,10 +20,10 @@ namespace INCHE.Infrastructure
             services.AddDbContext<DataBaseService>(options =>
             options.UseSqlServer(conn));
 
-
+            //log EF
             services.AddDbContext<DataBaseService>(options =>
                 options.UseSqlServer(conn)
-                    .EnableSensitiveDataLogging(true)    // opcional (solo en dev)
+                    .EnableSensitiveDataLogging(true)    
                     .LogTo(Console.WriteLine));
 
             services.AddScoped<IDataBaseService, DataBaseService>();

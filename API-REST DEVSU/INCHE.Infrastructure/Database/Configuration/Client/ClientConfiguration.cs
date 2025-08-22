@@ -5,9 +5,9 @@ using System.Reflection.Emit;
 
 namespace INCHE.Infrastructure.Database.Configuration
 {
-    public class ClienteConfiguration
+    public class ClientConfiguration
     {
-        public ClienteConfiguration(EntityTypeBuilder<ClienteEntity> b)
+        public ClientConfiguration(EntityTypeBuilder<ClientEntity> b)
 
 
         {
@@ -25,10 +25,9 @@ namespace INCHE.Infrastructure.Database.Configuration
             b.Property(c => c.FechaRegistro)
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            // Relación 1:1 con Persona (PK = FK)
             b.HasOne(c => c.Persona)
                 .WithOne(p => p.Cliente)
-                .HasForeignKey<ClienteEntity>(c => c.ClienteId)
+                .HasForeignKey<ClientEntity>(c => c.ClienteId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

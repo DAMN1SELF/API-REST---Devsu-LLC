@@ -10,9 +10,9 @@ public class DataBaseService : DbContext, IDataBaseService
 {
     public DataBaseService(DbContextOptions options) : base(options) { }
 
-    public DbSet<ClienteEntity> Cliente { get; set; }
-    public DbSet<CuentaEntity> Cuenta { get; set; }
-    public DbSet<MovimientoEntity> Movimiento { get; set; }
+    public DbSet<ClientEntity> Cliente { get; set; }
+    public DbSet<AccountEntity> Cuenta { get; set; }
+    public DbSet<TransactionEntity> Movimiento { get; set; }
     public DbSet<PersonaEntity> Persona { get; set; }
 
     public Task<IDbContextTransaction> BeginTransactionAsync()
@@ -29,12 +29,10 @@ public class DataBaseService : DbContext, IDataBaseService
 
     private void EntityConfiguration(ModelBuilder modelBuilder)
     {
-        
-
-        new PersonaConfiguration(modelBuilder.Entity<PersonaEntity>());
-        new ClienteConfiguration(modelBuilder.Entity<ClienteEntity>());
-        new CuentaConfiguration(modelBuilder.Entity<CuentaEntity>());
-        new MovimientoConfiguration(modelBuilder.Entity<MovimientoEntity>());
+        new PersonConfiguration(modelBuilder.Entity<PersonaEntity>());
+        new ClientConfiguration(modelBuilder.Entity<ClientEntity>());
+        new AccountConfiguration(modelBuilder.Entity<AccountEntity>());
+        new TransactionConfiguration(modelBuilder.Entity<TransactionEntity>());
 
     }
 }

@@ -5,9 +5,9 @@ using System.Reflection.Emit;
 
 namespace INCHE.Infrastructure.Database.Configuration
 {
-    public class PersonaConfiguration
+    public class PersonConfiguration
     {
-        public PersonaConfiguration(EntityTypeBuilder<PersonaEntity> b)
+        public PersonConfiguration(EntityTypeBuilder<PersonaEntity> b)
         {
 
             b.ToTable("Persona");
@@ -15,7 +15,7 @@ namespace INCHE.Infrastructure.Database.Configuration
             b.HasKey(p => p.PersonaId);
 
             b.Property(p => p.PersonaId)
-                .ValueGeneratedOnAdd(); // Identity
+                .ValueGeneratedOnAdd();
 
             b.Property(p => p.Nombres)
                 .IsRequired()
