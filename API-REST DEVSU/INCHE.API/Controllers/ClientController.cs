@@ -7,6 +7,8 @@ using INCHE.Application.Database.Client.Command.Update;
 using INCHE.Application.Database.Client.Dto.Create;
 using INCHE.Application.Database.Client.Dto.Patch;
 using INCHE.Application.Database.Client.Dto.Update;
+using INCHE.Application.Database.Client.Query.GetAll;
+using INCHE.Application.Database.Client.Query.GetbyId;
 using INCHE.Application.Exceptions;
 using INCHE.Application.Features;
 using INCHE.Common.Constants;
@@ -76,5 +78,34 @@ namespace INCHE.API.Controllers
             return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, message: Messages.RecordDeleted));
         }
 
+        // GET: api/v1/cliente/listar?page=1&pageSize=20
+        [HttpGet("listar")]
+        public async Task<IActionResult> GetAll(
+            [FromServices] IGetAllClientQuery getAll)
+
+        {
+            var data = await getAll.Execute();
+
+            if (data.Count == 0)
+                return StatusCode(StatusCodes.Status404NotFound, ResponseApiService.Response(StatusCodes.Status404NotFound));
+
+            return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data, Messages.RecordsRetrieved));
+
+        }
+        // GET: api/v1/cliente/obtener/{id}
+        [HttpGet("buscar/{id:int}")]
+        public async Task<IActionResult> GetById(
+            [FromRoute] int id,
+            [FromServices] IGetClientByIdQuery getClientById)
+        {
+            var data = await getClientById.Execute(id);
+
+            if (data==null)
+                return StatusCode(StatusCodes.Status404NotFound, ResponseApiService.Response(StatusCodes.Status404NotFound));
+
+            return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data, Messages.RecordsRetrieved));
+
+
+        }
     }
 }

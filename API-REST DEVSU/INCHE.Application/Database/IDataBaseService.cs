@@ -22,7 +22,8 @@ namespace INCHE.Application.DataBase
 		DbSet<MovimientoEntity> Movimiento { get; set; }
         #endregion
 
-		Task<IDbContextTransaction> BeginTransactionAsync();
+        DbSet<PersonaEntity> Persona{ get; set; }
+        Task<IDbContextTransaction> BeginTransactionAsync();
 		Task<bool> SaveAsync();
 
 	}

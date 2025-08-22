@@ -22,12 +22,10 @@ namespace INCHE.Application.Database.Client.Query.GetbyId
         {
             var dto = await _db.Cliente
                 .AsNoTracking()
-                .Where(e => e.PersonaId == id)
+                .Where(e => e.ClienteId == id)
                 .ProjectTo<ResponseClientDTO>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            if (dto is null)
-                throw new ApplicationException(Messages.RecordNotFound);
 
             return dto;
         }
