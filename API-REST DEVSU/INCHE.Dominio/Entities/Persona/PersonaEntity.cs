@@ -14,8 +14,7 @@ namespace INCHE.Domain.Entities
         public string? Direccion { get; private set; }
         public string? Telefono { get; private set; }
 
-        // 🔑 Navegación inversa (1:1 con Cliente)
-        public ClienteEntity? Cliente { get; private set; }
+        public ClientEntity? Cliente { get; private set; }
 
         protected PersonaEntity() { }
 

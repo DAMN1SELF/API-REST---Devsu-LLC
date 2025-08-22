@@ -3,21 +3,19 @@ using INCHE.Common.Constants;
 
 namespace INCHE.Domain.Entities
 {
-    public class ClienteEntity
+    public class ClientEntity
     {
-        public int ClienteId { get; protected set; } // PK y también FK a Persona
+        public int ClienteId { get; protected set; }
         public PersonaEntity Persona { get; private set; } = null!;
 
         public string ContrasenaHash { get; private set; } = null!;
         public bool Estado { get; private set; } = true;
         public DateTime FechaRegistro { get; private set; } = DateTime.UtcNow;
+        public ICollection<AccountEntity> Cuentas { get; } = new List<AccountEntity>();
 
-        // 🔑 Relación 1:N con Cuenta
-        public ICollection<CuentaEntity> Cuentas { get; } = new List<CuentaEntity>();
+        protected ClientEntity() { }
 
-        protected ClienteEntity() { }
-
-        private ClienteEntity(PersonaEntity persona, string contrasenaHash, bool estado, DateTime fechaRegistro)
+        private ClientEntity(PersonaEntity persona, string contrasenaHash, bool estado, DateTime fechaRegistro)
         {
             Persona = persona ?? throw new ArgumentNullException(nameof(persona));
             ClienteId = persona.PersonaId; 
@@ -30,13 +28,13 @@ namespace INCHE.Domain.Entities
             FechaRegistro = fechaRegistro;
         }
 
-        public static ClienteEntity Create(
+        public static ClientEntity Create(
             string nombres, string? genero, byte? edad,
             string? identificacion, string? direccion, string? telefono,
             string contrasenaHash)
         {
             var persona = new PersonaEntity(nombres, genero, edad, identificacion, direccion, telefono);
-            return new ClienteEntity(persona, contrasenaHash, true, DateTime.UtcNow);
+            return new ClientEntity(persona, contrasenaHash, true, DateTime.UtcNow);
         }
         public void Update(
             string nombres,string? genero, byte? edad,
