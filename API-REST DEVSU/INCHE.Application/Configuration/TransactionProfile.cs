@@ -26,7 +26,8 @@ namespace INCHE.Application.Configuration
                 .ForMember(dto => dto.Tipo_Movimiento, opt => opt.MapFrom(entity => entity.TipoMovimiento))
                 .ForMember(dto => dto.Saldo_Disponible, opt => opt.MapFrom(entity => entity.SaldoDisponible))
                 .ForMember(dto => dto.Valor_Movimiento, opt => opt.MapFrom(entity => entity.Valor))
-                .ForMember(dto => dto.Numero_Cuenta, opt => opt.MapFrom(entity => entity.NumeroCuenta));
+                .ForMember(dto => dto.Numero_Cuenta, opt => opt.MapFrom(entity => entity.NumeroCuenta))
+                ;
 
 
         }

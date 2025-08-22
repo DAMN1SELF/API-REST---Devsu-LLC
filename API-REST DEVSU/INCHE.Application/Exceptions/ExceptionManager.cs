@@ -10,8 +10,13 @@ namespace INCHE.Application.Exceptions
     {
         public void OnException(ExceptionContext context)
         {
+
+            var detalle = !string.IsNullOrWhiteSpace(context.Exception?.InnerException?.Message)
+                ? context.Exception.InnerException.Message
+                : context.Exception?.Message ?? "Ocurrió un error inesperado.";
+
             context.Result = new ObjectResult(ResponseApiService.Response(
-                StatusCodes.Status500InternalServerError,context.Exception.InnerException.Message, context.Exception.Message));
+                StatusCodes.Status500InternalServerError, detalle, context.Exception.Message));
 
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 

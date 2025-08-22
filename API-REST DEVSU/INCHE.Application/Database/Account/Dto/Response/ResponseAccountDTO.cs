@@ -11,5 +11,8 @@ namespace INCHE.Application.Database.Account.Dto.Response
         public decimal Saldo_Actual { get; set; }
         public bool Estado_Cuenta { get; set; }
         public DateTime Fecha_Apertura { get; set; }
+        public string Nombres_Cliente { get; set; }
+
+
     }
 }

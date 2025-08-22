@@ -25,7 +25,9 @@ namespace INCHE.Application.Configuration
                 .ForMember(dto => dto.Saldo_Inicial, opt => opt.MapFrom(entity => entity.SaldoInicial))
                 .ForMember(dto => dto.Saldo_Actual, opt => opt.MapFrom(entity => entity.SaldoActual))
                 .ForMember(dto => dto.Estado_Cuenta, opt => opt.MapFrom(entity => entity.Estado))
-                .ForMember(dto => dto.Fecha_Apertura, opt => opt.MapFrom(entity => entity.FechaApertura));
+                .ForMember(dto => dto.Fecha_Apertura, opt => opt.MapFrom(entity => entity.FechaApertura))
+                .ForMember(dto => dto.Nombres_Cliente, opt => opt.MapFrom(entity => entity.Cliente.Person.Nombres));
+                ;
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using INCHE.Application.Database.Account.Command.Create;
+using INCHE.Application.Database.Account.Command.Delete;
 using INCHE.Application.Database.Account.Command.Update;
 using INCHE.Application.Database.Account.Dto.Create;
+using INCHE.Application.Database.Account.Query.GetAll;
 using INCHE.Application.Database.Account.Query.GetbyIdClient;
 using INCHE.Application.Database.Account.Query.GetbyNumberAccount;
+using INCHE.Application.Database.Client.Command.Delete;
 using INCHE.Application.Exceptions;
 using INCHE.Application.Features;
 using INCHE.Common.Constants;
@@ -57,6 +60,20 @@ namespace INCHE.API.Controllers
 
         }
 
+        // GET: api/v1/cuenta/listar}
+        [HttpGet("listar")]
+        public async Task<IActionResult> GetAll(
+            [FromServices] IGetAllAccountQuery getbAllAccountQuery)
+        {
+
+            var data = await getbAllAccountQuery.Execute();
+
+            if (data == null || data.Count == 0)
+                return StatusCode(StatusCodes.Status404NotFound, ResponseApiService.Response(StatusCodes.Status404NotFound, data, message: Messages.RecordNotFound));
+
+            return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data, message: Messages.RecordsRetrieved));
+        }
+
         // GET: api/v1/cuenta/cliente/{clienteId}
         [HttpGet("cliente/{clienteId:int}")]
         public async Task<IActionResult> GetByClient(
@@ -78,8 +95,7 @@ namespace INCHE.API.Controllers
             Guid numeroCuenta,
             [FromServices] IGetAccountByNumberQuery getByNumberQuery)
         {
-          
-
+            
             var data = await getByNumberQuery.Execute(numeroCuenta);
 
             if (data == null)
@@ -87,5 +103,22 @@ namespace INCHE.API.Controllers
 
             return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data, message: Messages.RecordRetrieved));
         }
+
+        // DELETE: api/v1/cuenta/{numeroCuenta}
+        [HttpDelete("{numeroCuenta:guid}")]
+        public async Task<IActionResult> Delete(
+            Guid numeroCuenta,
+            [FromServices] IDeleteAccountCommand deleteCommand)
+        {
+
+            var data = await deleteCommand.Execute(numeroCuenta);
+            if (!data)
+                return StatusCode(StatusCodes.Status404NotFound,
+                    ResponseApiService.Response(StatusCodes.Status404NotFound, message: Messages.RecordAlreadyDeleted));
+
+            return StatusCode(StatusCodes.Status200OK,
+                ResponseApiService.Response(StatusCodes.Status200OK, message: Messages.RecordDeleted));
+        }
+
     }
 }

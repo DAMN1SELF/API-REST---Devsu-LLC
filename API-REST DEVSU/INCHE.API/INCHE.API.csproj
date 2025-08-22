@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\INCHE.External\INCHE.External.csproj" />
     <ProjectReference Include="..\INCHE.Infrastructure\INCHE.Infrastructure.csproj" />
   </ItemGroup>
 

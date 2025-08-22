@@ -19,22 +19,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins(
+                "http://localhost:4200"   // Angular
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials() // si necesitas enviar cookies/jwt por headers
+    );
+});
+
 var app = builder.Build();
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowFrontend",
-//        policy => policy
-//            .WithOrigins(
-//                "http://localhost:4200"   // Angular
-//            )
-//            .AllowAnyHeader()
-//            .AllowAnyMethod()
-//            .AllowCredentials() // si necesitas enviar cookies/jwt por headers
-//    );
-//});
-
 app.UseCors("AllowFrontend");
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

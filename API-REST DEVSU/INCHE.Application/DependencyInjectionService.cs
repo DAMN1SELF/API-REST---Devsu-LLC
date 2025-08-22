@@ -3,7 +3,9 @@ using AutoMapper;
 using FluentValidation;
 using INCHE.Application.Configuration;
 using INCHE.Application.Database.Account.Command.Create;
+using INCHE.Application.Database.Account.Command.Delete;
 using INCHE.Application.Database.Account.Command.Update;
+using INCHE.Application.Database.Account.Query.GetAll;
 using INCHE.Application.Database.Account.Query.GetbyIdClient;
 using INCHE.Application.Database.Account.Query.GetbyNumberAccount;
 using INCHE.Application.Database.Client.Command.Create;
@@ -71,7 +73,9 @@ namespace INCHE.Application
 
             services.AddTransient<ICreateAccountCommand, CreateAccountCommand>();
             services.AddTransient<IUpdateAccountCommand, UpdateAccountCommand>();
+            services.AddTransient<IDeleteAccountCommand, DeleteAccountCommand>();
 
+            services.AddTransient<IGetAllAccountQuery, GetAllAccountQuery>();
             services.AddTransient<IGetAccountsByClientQuery, GetAccountsByClientQuery>();
             services.AddTransient<IGetAccountByNumberQuery, GetAccountByNumberQuery>();
 
