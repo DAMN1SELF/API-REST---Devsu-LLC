@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="FluentValidation" Version="11.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
   </ItemGroup>
@@ -17,14 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Movimiento\Command\Create\" />
-    <Folder Include="Database\Movimiento\Command\Delete\" />
-    <Folder Include="Database\Movimiento\Command\Patch\" />
-    <Folder Include="Database\Movimiento\Command\Update\" />
-    <Folder Include="Database\Movimiento\Dto\Request\" />
-    <Folder Include="Database\Movimiento\Dto\Response\" />
-    <Folder Include="Database\Movimiento\Query\GetAll\" />
-    <Folder Include="Database\Movimiento\Query\GetbyId\" />
+    <Folder Include="Database\Transaction\Query\GetAll\" />
+    <Folder Include="Database\Transaction\Query\GetbyId\" />
   </ItemGroup>
 
 </Project>

@@ -30,7 +30,7 @@ namespace INCHE.Application.Database.Client.Command.Create
              {
                 if (!string.IsNullOrWhiteSpace(create.IdentificacionCliente))
                 {
-                    var dup = await _db.Cliente.AnyAsync(c => c.Persona.Identificacion == create.IdentificacionCliente);
+                    var dup = await _db.Cliente.AnyAsync(c => c.Person.Identificacion == create.IdentificacionCliente);
                     if (dup) throw new ApplicationException(Messages.DuplicateId);
                 }
 

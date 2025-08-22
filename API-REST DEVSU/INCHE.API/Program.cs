@@ -1,6 +1,7 @@
 using INCHE.Api;
 using INCHE.Application;
 using INCHE.Common;
+using INCHE.External;
 using INCHE.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services
     .AddWebApi()
     .AddCommon()
     .AddApplication()
+    .AddExternal(builder.Configuration)
     .AddPersistence(builder.Configuration);
 
 builder.Services.AddControllers();
@@ -18,6 +20,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowFrontend",
+//        policy => policy
+//            .WithOrigins(
+//                "http://localhost:4200"   // Angular
+//            )
+//            .AllowAnyHeader()
+//            .AllowAnyMethod()
+//            .AllowCredentials() // si necesitas enviar cookies/jwt por headers
+//    );
+//});
 
 app.UseCors("AllowFrontend");
 app.UseSwagger();

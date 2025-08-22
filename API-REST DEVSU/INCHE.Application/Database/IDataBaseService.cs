@@ -12,6 +12,8 @@ namespace INCHE.Application.DataBase
     {
         #region Cliente
         DbSet<ClientEntity> Cliente { get; set; }
+        DbSet<PersonEntity> Persona { get; set; }
+
         #endregion
 
         #region Cuenta
@@ -22,7 +24,6 @@ namespace INCHE.Application.DataBase
 		DbSet<TransactionEntity> Movimiento { get; set; }
         #endregion
 
-        DbSet<PersonaEntity> Persona{ get; set; }
         Task<IDbContextTransaction> BeginTransactionAsync();
 		Task<bool> SaveAsync();
 

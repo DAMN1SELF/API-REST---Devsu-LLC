@@ -23,7 +23,7 @@ namespace INCHE.Application.Database.Client.Command.Patch
 
 
             var entity = await _db.Cliente
-                .Include(c => c.Persona)
+                .Include(c => c.Person)
                 .FirstOrDefaultAsync(c => c.ClienteId == id);
 
             if (entity is null)
@@ -32,10 +32,10 @@ namespace INCHE.Application.Database.Client.Command.Patch
             try
             {
                 if (!string.IsNullOrWhiteSpace(patch.IdentificacionCliente) &&
-                    patch.IdentificacionCliente != entity.Persona.Identificacion)
+                    patch.IdentificacionCliente != entity.Person.Identificacion)
                 {
                     var dup = await _db.Cliente.AnyAsync(c =>
-                        c.ClienteId != id && c.Persona.Identificacion == patch.IdentificacionCliente);
+                        c.ClienteId != id && c.Person.Identificacion == patch.IdentificacionCliente);
                     if (dup) throw new ApplicationException(Messages.DuplicateKey);
                 }
 

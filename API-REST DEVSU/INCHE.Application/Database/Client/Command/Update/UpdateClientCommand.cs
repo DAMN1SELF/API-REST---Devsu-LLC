@@ -21,7 +21,7 @@ namespace INCHE.Application.Database.Client.Command.Update
         {
 
             var entity = await _db.Cliente
-                .Include(c => c.Persona)
+                .Include(c => c.Person)
                 .FirstOrDefaultAsync(e => e.ClienteId == id);
             if (entity is null) throw new ApplicationException(Messages.RecordNotFound);
 
@@ -29,9 +29,9 @@ namespace INCHE.Application.Database.Client.Command.Update
             {
 
                 if (!string.IsNullOrWhiteSpace(update.IdentificacionCliente) &&
-                    update.IdentificacionCliente != entity.Persona.Identificacion)
+                    update.IdentificacionCliente != entity.Person.Identificacion)
                 {
-                    var dup = await _db.Cliente.AnyAsync(e => e.ClienteId != id && e.Persona.Identificacion == update.IdentificacionCliente);
+                    var dup = await _db.Cliente.AnyAsync(e => e.ClienteId != id && e.Person.Identificacion == update.IdentificacionCliente);
                     if (dup) throw new ApplicationException(Messages.DuplicateKey);
                 }
 

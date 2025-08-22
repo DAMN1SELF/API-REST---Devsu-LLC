@@ -5,7 +5,10 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "IssuerJwt": "DANIEL INCHE",
+        "AudienceJwt": "INGENIERO SOFTWARE",
+        "SecretKeyJwt": "cabcd273db987720a92e4728010ebce1ccafa2b53b509d8b8c49a520303f409bS"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7162;http://localhost:5183"
@@ -15,7 +18,10 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "IssuerJwt": "DANIEL INCHE",
+        "AudienceJwt": "INGENIERO SOFTWARE",
+        "SecretKeyJwt": "cabcd273db987720a92e4728010ebce1ccafa2b53b509d8b8c49a520303f409bS"
       }
     },
     "Container (Dockerfile)": {
@@ -35,7 +41,13 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:49114",
-      "sslPort": 44308
+      "sslPort": 44308,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "IssuerJwt": "DANIEL INCHE",
+        "AudienceJwt": "INGENIERO SOFTWARE",
+        "SecretKeyJwt": "cabcd273db987720a92e4728010ebce1ccafa2b53b509d8b8c49a520303f409bS"
+      }
     }
   }
 }
