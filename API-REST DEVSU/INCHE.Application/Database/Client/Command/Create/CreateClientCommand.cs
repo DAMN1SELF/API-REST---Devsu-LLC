@@ -34,7 +34,7 @@ namespace INCHE.Application.Database.Client.Command.Create
                     if (dup) throw new ApplicationException(Messages.DuplicateKey);
                 }
 
-                var entity = _mapper.Map<ClienteEntity>(create);
+                var entity = _mapper.Map<ClientEntity>(create);
 
                 await _db.Cliente.AddAsync(entity);
                 await _db.SaveAsync();

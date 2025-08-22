@@ -13,18 +13,17 @@ namespace INCHE.Application.Configuration
         {
 
 
-            // CreateDTO → Entity
-            CreateMap<CreateClientDTO, ClienteEntity>()
+            // CreateDTO -> Entity
+            CreateMap<CreateClientDTO, ClientEntity>()
                 .ConstructUsing(static dto =>
-                (ClienteEntity.Create(dto.NombresCliente, dto.GeneroCliente, dto.EdadCliente, dto.IdentificacionCliente,
+                (ClientEntity.Create(dto.NombresCliente, dto.GeneroCliente, dto.EdadCliente, dto.IdentificacionCliente,
                     dto.DireccionCliente, dto.TelefonoCliente, dto.ContrasenaHashCliente)
                 ))
-                //.ForMember(entity => entity.Persona.PersonaId, opt => opt.Ignore())  
                 .ForMember(entity => entity.Cuentas, opt => opt.Ignore());
 
 
-            // UpdateDTO → Entity
-            CreateMap<UpdateClientDTO, ClienteEntity>()
+            // UpdateDTO -> Entity
+            CreateMap<UpdateClientDTO, ClientEntity>()
                 .AfterMap((src, dest) =>
                 {
                     dest.Update(
@@ -38,8 +37,8 @@ namespace INCHE.Application.Configuration
                     );
                 })
                 .ForAllMembers(o => o.Ignore());
-            // PatchDTO → Entity
-            CreateMap<PatchClientDTO, ClienteEntity>()
+            // PatchDTO -> Entity
+            CreateMap<PatchClientDTO, ClientEntity>()
                 .AfterMap((src, dest) =>
                 {
                     dest.Patch(
@@ -56,8 +55,8 @@ namespace INCHE.Application.Configuration
                 .ForAllMembers(o => o.Ignore())
                ;
 
-            // Entity → ResponseDTO
-            CreateMap<ClienteEntity, ResponseClientDTO>()
+            // Entity -> ResponseDTO
+            CreateMap<ClientEntity, ResponseClientDTO>()
                 .ForMember(dto => dto.CodigoCliente, opt => opt.MapFrom(entity => entity.Persona.PersonaId))
                 .ForMember(dto => dto.EstadoCliente, opt => opt.MapFrom(entity => entity.Estado))
                 .ForMember(dto => dto.FechaRegistroCliente, opt => opt.MapFrom(entity => entity.FechaRegistro))
