@@ -21,7 +21,7 @@ namespace INCHE.Producto.Application.DataBase.User.Commands.AuthUser
 
             var user = await _db.Cliente
                 .Include(c => c.Person)
-                .FirstOrDefaultAsync(c => c.Person.Identificacion == model.Identificacion );
+                .FirstOrDefaultAsync(c => c.Person.Identificacion == model.Identificacion);
 
             if (user == null) throw new Exception("Usuario o contraseña incorrectos");
 

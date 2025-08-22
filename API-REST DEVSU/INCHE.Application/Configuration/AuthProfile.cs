@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using AutoMapper;
 using INCHE.Application.Database.Account.Dto.Create;
 using INCHE.Application.Database.Client.Dto.Auth;
@@ -15,7 +11,9 @@ namespace INCHE.Application.Configuration
         public AuthProfile()
         {
 
+        
 
+            // Entity -> ResponseDTO
             CreateMap<ClientEntity, ResponseAuthUserModel>()
                 .ForMember(dto => dto.Token, opt => opt.Ignore())
                 .ForMember(dto => dto.UserName, opt => opt.MapFrom(entity => entity.Person.Nombres));

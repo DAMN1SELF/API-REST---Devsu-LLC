@@ -18,9 +18,4 @@
     <ProjectReference Include="..\INCHE.Dominio\INCHE.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\Transaction\Query\GetAll\" />
-    <Folder Include="Database\Transaction\Query\GetbyId\" />
-  </ItemGroup>
-
 </Project>

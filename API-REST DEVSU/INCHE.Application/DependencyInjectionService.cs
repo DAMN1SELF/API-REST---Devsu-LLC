@@ -11,8 +11,17 @@ using INCHE.Application.Database.Client.Command.Delete;
 using INCHE.Application.Database.Client.Command.Patch;
 using INCHE.Application.Database.Client.Command.Update;
 using INCHE.Application.Database.Client.Dto.Auth;
+using INCHE.Application.Database.Client.Dto.Create;
+using INCHE.Application.Database.Client.Dto.Patch;
+using INCHE.Application.Database.Client.Dto.Update;
 using INCHE.Application.Database.Client.Query.GetAll;
 using INCHE.Application.Database.Client.Query.GetbyId;
+using INCHE.Application.Database.Transaction.Command.Create;
+using INCHE.Application.Database.Transaction.Command.Delete;
+using INCHE.Application.Database.Transaction.Query.GetAll;
+using INCHE.Application.Database.Transaction.Query.GetbyId;
+using INCHE.Application.Database.Transaction.Query.GetById;
+using INCHE.Application.Validators.Client;
 using INCHE.Producto.Application.DataBase.User.Commands.AuthUser;
 using INCHE.Producto.Application.Validators.User;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +37,7 @@ namespace INCHE.Application
                 config.AddProfile(new ClienteProfile()); 
                 config.AddProfile(new AccountProfile());
                 config.AddProfile(new AuthProfile());
+                config.AddProfile(new TransactionProfile());
             });
 
             services.AddSingleton(mapper.CreateMapper());
@@ -49,6 +59,9 @@ namespace INCHE.Application
             services.AddTransient<IGetAllClientQuery, GetAllClientQuery>();
             services.AddTransient<IGetClientByIdQuery, GetClientByIdQuery>();
 
+            services.AddScoped<IValidator<CreateClientDTO>, CreateClientDTOValidator>();
+            services.AddScoped<IValidator<UpdateClientDTO>, UpdateClientDTOValidator>();
+            services.AddScoped<IValidator<PatchClientDTO>, PatchClientDTOValidator>();
 
 
             #endregion
@@ -61,6 +74,18 @@ namespace INCHE.Application
 
             services.AddTransient<IGetAccountsByClientQuery, GetAccountsByClientQuery>();
             services.AddTransient<IGetAccountByNumberQuery, GetAccountByNumberQuery>();
+
+            #endregion
+
+
+            #region MOVIMIENTOS
+
+            services.AddScoped<ICreateTransactionCommand, CreateTransactionCommand>();
+            services.AddScoped<IDeleteTransactionCommand, DeleteTransactionCommand>();
+
+            services.AddScoped<IGetTransactionByIdQuery, GetTransactionByIdQuery>();
+            services.AddScoped<IGetTransactionsByAccountQuery, GetTransactionsByAccountQuery>();
+            services.AddScoped<IGetTransactionsByClientQuery, GetTransactionsByClientQuery>();
 
             #endregion
 
